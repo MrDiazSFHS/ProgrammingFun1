@@ -31,3 +31,52 @@ public void draw(){
   }
 
 }
+class Star{
+  
+  float r;
+  float angle;
+  float rt;
+  float radius;
+  float prevR;
+  float prevR2;
+  int counter;
+  
+  public Star(){
+    r = random(0, width/2);
+    angle = random(0, 2*PI);
+    radius = 1;
+    rt = 0;
+  }
+  
+  public void updateStar(){
+    prevR2 = prevR;
+    prevR = r;
+       
+    rt = map(mouseX, 0, width, 0, 50);
+    
+    r += rt;
+    angle += map(mouseY, 0, height, -PI/90, PI/90);
+    
+    radius = map(Math.abs(getX()), 0, width/2, 1, 5);
+  }
+  
+  public float getX(){
+    return r*cos(angle);
+  }
+  
+  public float getY(){
+    return r*sin(angle);
+  }
+  
+  public void drawStar()
+  {
+    counter++;
+    noStroke();
+    circle(r*cos(angle), r*sin(angle), radius*2);
+    stroke(255);
+    if(counter > 3)
+      line(r*cos(angle), r*sin(angle), prevR*cos(angle), prevR*sin(angle));
+    
+  }
+
+}
